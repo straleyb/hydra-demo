@@ -5,15 +5,16 @@ class CatalogController < ApplicationController
 
   include Hydra::Catalog
   # These before_filters apply the hydra access controls
-  before_filter :enforce_show_permissions, :only=>:show
+  #before_filter :enforce_show_permissions, :only=>:show
   # This applies appropriate access controls to all solr queries
-  CatalogController.search_params_logic += [:add_access_controls_to_solr_params]
+  #CatalogController.search_params_logic += [:add_access_controls_to_solr_params]
 
 
   configure_blacklight do |config|
     config.search_builder_class = Hydra::SearchBuilder
     config.default_solr_params = {
       :qt => 'search',
+      :qf => 'title_tesim author_tesim',
       :rows => 10
     }
 
